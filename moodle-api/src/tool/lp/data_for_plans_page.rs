@@ -300,7 +300,7 @@ pub struct Returns {
 }
 
 pub async fn call<'a>(
-    client: &'a mut moodle_client::MoodleClient,
+    client: &'a mut impl moodle_client::MoodleClient,
     params: &'a mut Params,
 ) -> anyhow::Result<Returns> {
     let json = client.post("tool_lp_data_for_plans_page", params).await?;
@@ -309,7 +309,7 @@ pub async fn call<'a>(
 }
 
 pub async fn call_raw<'a>(
-    client: &'a mut moodle_client::MoodleClient,
+    client: &'a mut impl moodle_client::MoodleClient,
     params: &'a mut Params,
 ) -> anyhow::Result<serde_json::Value> {
     client.post("tool_lp_data_for_plans_page", params).await

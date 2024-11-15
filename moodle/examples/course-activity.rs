@@ -1,5 +1,5 @@
 use moodle::api::core::course::*;
-use moodle::client::{login, MoodleClient};
+use moodle_client::MobileMoodleClient;
 
 #[tokio::main]
 async fn main() {
@@ -7,8 +7,7 @@ async fn main() {
     let username = std::env::var("MOODLE_USERNAME").unwrap();
     let password = std::env::var("MOODLE_PASSWORD").unwrap();
 
-    let token = login(&base_url, &username, &password).await.unwrap();
-    let mut client = MoodleClient::new(&base_url, &token);
+    let mut client = MobileMoodleClient::login(&base_url, &username, &password).await.unwrap();
 
     let result = get_enrolled_courses_by_timeline_classification::call(
         &mut client,

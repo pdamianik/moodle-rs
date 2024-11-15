@@ -223,7 +223,7 @@ pub struct Returns {
 }
 
 pub async fn call<'a>(
-    client: &'a mut moodle_client::MoodleClient,
+    client: &'a mut impl moodle_client::MoodleClient,
     params: &'a mut Params,
 ) -> anyhow::Result<Returns> {
     let json = client
@@ -234,7 +234,7 @@ pub async fn call<'a>(
 }
 
 pub async fn call_raw<'a>(
-    client: &'a mut moodle_client::MoodleClient,
+    client: &'a mut impl moodle_client::MoodleClient,
     params: &'a mut Params,
 ) -> anyhow::Result<serde_json::Value> {
     client.post("mod_forum_get_forum_discussions", params).await
